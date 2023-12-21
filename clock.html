@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="clock.css" rel="stylesheet">
+</head>
+<body class="bdy">
+    <h1 id="heading">Digital Clock</h1>
+    <div class="container">
+  <div class="circle" style="--clr:#7F00FF">
+    <div class="dots hr_dots"></div>
+
+    <svg>
+        <circle cx="70" cy="70" r="70"></circle>
+        <circle cx="70" cy="70" r="70" id="hh"></circle>
+
+    </svg>
+    <div id="hour">
+       00
+  </div>
+
+</div>
+<div class="circle"  style="--clr:#008080">
+    <div class="dots min_dots"></div>
+    <svg>
+        <circle cx="70" cy="70" r="70"></circle>
+        <circle cx="70" cy="70" r="70" id="mm"></circle>
+
+    </svg>
+  
+    <div id="min">
+       00
+    </div>
+</div>
+<div class="circle"  style="--clr:#fee800">
+    <div class="dots sec_dots"></div>
+    <svg>
+        <circle cx="70" cy="70" r="70"></circle>
+        <circle cx="70" cy="70" r="70" id="ss"></circle>
+
+    </svg>
+
+    <div id="sec">
+        00
+    </div>
+</div>
+
+
+<div class="time">
+    <div id="ampm">
+        AM
+    </div>
+
+</div>
+</div>
+<br>
+
+
+
+<p>Designed and develoed by MISBA SABA</p>
+
+<script>
+    setInterval(() =>{
+        let hours=document.getElementById("hour");
+    let minutes=document.getElementById("min");
+    let seconds=document.getElementById("sec");
+    let ampm=document.getElementById("ampm");
+    let cont=document.querySelector(".container");
+
+   
+   let h = new Date().getHours();
+   let m= new Date().getMinutes();
+   let s=new Date().getSeconds();
+   let am = h>=12?"PM":"AM";
+   let head=document.getElementById("heading");
+   let body=document.querySelector(".bdy");
+   head.addEventListener("click",function(){
+    cont.style.color=" rgb(224, 80, 104)";
+    // cont.style.backgroundImage=url("pic/night.webp");
+   });
+   cont.addEventListener("click",function(){
+cont.style.color="black";
+
+   });
+
+
+
+   if(h>12){
+    h=h-12;
+   }
+
+
+    
+   h = (h<1)?"0"+h :h;
+   m = (m<10)?"0"+m : m;
+   s  = (s<10)?"0"+s : s;
+
+
+
+   hours.innerHTML=h + "<br> <span> Hour </span>";
+   minutes.innerHTML=m + "<br> <span> Minutes</span>";
+   seconds.innerHTML=s + "<br> <span> Seconds </span>";
+   ampm.innerHTML=am;
+
+
+   hh=document.getElementById("hh");
+   mm=document.getElementById("mm");
+   ss=document.getElementById("ss");
+   hh.style.strokeDashoffset=440-(440*h) /12;
+    mm.style.strokeDashoffset=440-(440*m) /60;
+ ss.style.strokeDashoffset=440-(440*s) /60;
+
+hr_dots=document.querySelector(".hr_dots");
+min_dots=document.querySelector(".min_dots");
+sec_dots=document.querySelector(".sec_dots");
+
+hr_dots.style.transform=`rotate(${h*30}deg)`//360/12
+min_dots.style.transform=`rotate(${m*6}deg)`//360/60
+sec_dots.style.transform=`rotate(${s*6}deg)`
+
+
+    })
+
+
+</script>
+</body>
+</html>
